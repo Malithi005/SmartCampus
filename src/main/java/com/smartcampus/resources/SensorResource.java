@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Path("/sensors")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class SensorResource {
 
     @GET
@@ -28,6 +27,7 @@ public class SensorResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response registerSensor(Sensor sensor, @Context UriInfo uriInfo) {
         if (sensor.getId() == null || sensor.getId().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST)

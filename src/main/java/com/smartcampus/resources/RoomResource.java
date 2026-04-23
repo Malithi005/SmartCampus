@@ -10,7 +10,6 @@ import java.util.List;
 
 @Path("/rooms")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class RoomResource {
 
     @GET
@@ -19,6 +18,7 @@ public class RoomResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response createRoom(Room room, @Context UriInfo uriInfo) {
         if (room.getId() == null || room.getId().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST)
