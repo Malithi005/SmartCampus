@@ -1,6 +1,7 @@
 package com.smartcampus;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -17,7 +18,14 @@ public class Main {
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+
+        // Add static file handler to serve the frontend from src/main/webapp
+        StaticHttpHandler staticHandler = new StaticHttpHandler("src/main/webapp");
+        staticHandler.setFileCacheEnabled(false); // Disable cache for development
+        server.getServerConfiguration().addHttpHandler(staticHandler, "/");
+
+        return server;
     }
 
     public static void main(String[] args) throws IOException {
