@@ -32,6 +32,7 @@ This is a RESTful API built using JAX-RS (Jersey) and Grizzly, designed to manag
    mvn exec:java
    ```
    The application will be available at: **http://localhost:8080/api/v1**
+   (WADL available at: **http://localhost:8080/api/v1/application.wadl**)
 
 ---
 

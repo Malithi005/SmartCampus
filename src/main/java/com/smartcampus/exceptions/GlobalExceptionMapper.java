@@ -1,5 +1,6 @@
 package com.smartcampus.exceptions;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -15,6 +16,11 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable exception) {
+        // If it's already a WebApplicationException (e.g., 404, 405), keep its status
+        if (exception instanceof WebApplicationException) {
+            return ((WebApplicationException) exception).getResponse();
+        }
+
         LOGGER.log(Level.SEVERE, "Unexpected error occurred", exception);
         
         Map<String, String> errorResponse = new HashMap<>();
