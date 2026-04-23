@@ -13,14 +13,16 @@ public class DiscoveryResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscovery() {
+    public Response getDiscovery(@javax.ws.rs.core.Context javax.ws.rs.core.UriInfo uriInfo) {
         Map<String, Object> discovery = new HashMap<>();
         discovery.put("version", "1.0.0");
         discovery.put("admin", "admin@smartcampus.com");
         
+        String baseUri = uriInfo.getBaseUri().toString();
+        
         Map<String, String> links = new HashMap<>();
-        links.put("rooms", "/api/v1/rooms");
-        links.put("sensors", "/api/v1/sensors");
+        links.put("rooms", baseUri + "rooms");
+        links.put("sensors", baseUri + "sensors");
         
         discovery.put("links", links);
         
