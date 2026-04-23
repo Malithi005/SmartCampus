@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ApplicationPath("/api/v1")
 public class SmartCampusApplication extends ResourceConfig {
     // In-memory data structures
     public static Map<String, Room> rooms = new HashMap<>();
