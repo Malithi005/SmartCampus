@@ -88,7 +88,7 @@ This is a RESTful API built using JAX-RS (Jersey) and Grizzly, designed to manag
 #### 2.Dependency Validation (422 Unprocessable Entity)
 **Question:** Why is HTTP 422 often considered more semantically accurate than a standard 404 when the issue is a missing reference inside a valid JSON payload?
 
-**Answer:** A `404 Not Found` implies the requested URL does not exist. However, if the URL is correct but the metadata inside the JSON (like a non-existent `roomId` in a Sensor registration) is logically invalid, the resource at that URL simply cannot process the request. `422 Unprocessable Entity` is more accurate because it signals that the request structure is correct, but the business logic cannot proceed with the provided values.
+**Answer:** A `404 Not Found` implies the requested URL does not exist. However, if the URL is correct but the metadata inside the JSON (like a `roomId`) points to something non-existent, the request is "Unprocessable." `422 Unprocessable Entity` tells the client: "I understood your request structure, but the business logic cannot handle these specific values."
 
 #### 4. The Global Safety Net (500)
 **Question:** From a cybersecurity standpoint, explain the risks associated with exposing internal Java stack traces to external API consumers. What specific information could an attacker gather from such a trace?
